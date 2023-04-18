@@ -1224,9 +1224,10 @@
                             const cell = document.createElement("td");
                             const link = document.createElement("a");
                             const image = document.createElement("img");
-                            image.src = "Data/IMG/Links/" + temp.image;
                             link.href = temp.href;
                             image.className = "link";
+                            image.src = "Data/IMG/Links/" + temp.image;
+                            image.alt = temp.image.replace(/\.png$/, '');
                             link.appendChild(image);
                             cell.appendChild(link);
                             row.appendChild(cell);
