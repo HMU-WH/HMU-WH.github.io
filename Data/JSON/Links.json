@@ -1,15 +1,15 @@
 [
     {
+        "image": "Java.png",
+        "href": "MyNote/JAVA"
+    },
+    {
         "image": "GGPLOT2.png",
         "href": "MyNote/GGPLOT2"
     },
     {
         "image": "JavaWeb.png",
         "href": "MyNote/JAVA WEB"
-    },
-    {
-        "image": "Bioinformatics.png",
-        "href": "MyNote/Bioinformatics"
     },
     {
         "image": "PubMed.png",
