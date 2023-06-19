@@ -4,6 +4,10 @@
         "href": "MyNote/JAVA"
     },
     {
+        "image": "Python.png",
+        "href": "MyNote/Python"
+    },
+    {
         "image": "GGPLOT2.png",
         "href": "MyNote/GGPLOT2"
     },
