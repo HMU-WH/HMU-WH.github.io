@@ -1,0 +1,82 @@
+[
+	{
+		"image": "Java.png",
+		"href": "MyNote/JAVA"
+	},
+	{
+		"image": "Python.png",
+		"href": "MyNote/Python"
+	},
+	{
+		"image": "GGPLOT2.png",
+		"href": "MyNote/GGPLOT2"
+	},
+	{
+		"image": "JavaWeb.png",
+		"href": "MyNote/JAVA WEB"
+	},
+	{
+		"image": "MachineLearning.png",
+		"href": "MyNote/MachineLearning"
+	},
+	{
+		"image": "GoogleTranslate.png",
+		"href": "https://translate.google.com"
+	},
+	{
+		"image": "PubMed.png",
+		"href": "https://pubmed.ncbi.nlm.nih.gov"
+	},
+	{
+		"image": "StackOverflow.png",
+		"href": "https://stackoverflow.com"
+	},
+	{
+		"image": "Iconfont.png",
+		"href": "https://www.iconfont.cn"
+	},
+	{
+		"image": "Yan-Holtz.png",
+		"href": "https://www.yan-holtz.com"
+	},
+	{
+		"image": "Posit.png",
+		"href": "https://posit.co"
+	},
+	{
+		"image": "Github.png",
+		"href": "https://github.com"
+	},
+	{
+		"image": "Coolors.png",
+		"href": "https://coolors.co"
+	},
+	{
+		"image": "Convertio.png",
+		"href": "https://convertio.co"
+	},
+	{
+		"image": "RDRR.png",
+		"href": "https://rdrr.io"
+	},
+	{
+		"image": "STHDA.png",
+		"href": "http://www.sthda.com/english"
+	},
+	{
+		"image": "Codepen.png",
+		"href": "https://codepen.io"
+	},
+	{
+		"image": "Runoob.png",
+		"href": "https://www.runoob.com"
+	},
+	{
+		"image": "BioRender.png",
+		"href": "https://www.biorender.com"
+	},
+	{
+		"image": "Echarts.png",
+		"href": "https://echarts.apache.org"
+	}
+]
