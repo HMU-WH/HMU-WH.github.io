@@ -279,7 +279,7 @@
                 links = JSON.parse(xhr.responseText);
                 function LinkLoad() {
                     const table = document.getElementById("links");
-                    let colNum = Math.floor(Math.max((window.innerWidth - 300), 600) / 80);
+                    let colNum = Math.floor(Math.max((window.innerWidth - 200), 600) / 80);
                     const links = JSON.parse(xhr.responseText);
                     table.innerHTML = null;
                     if (colNum > links.length) { colNum = links.length; }
