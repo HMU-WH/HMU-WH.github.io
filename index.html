@@ -119,14 +119,14 @@
             animation: jitter 0.5s linear infinite;
         }
 
-        table#links {
+        tableLinks#links {
             left: 50%;
             position: absolute;
             top: calc(15% + 375px);
             transform: translate(-50%, 0);
         }
 
-        table#links td {
+        tableLinks#links td {
             width: 75px;
             height: 75px;
             text-align: center;
@@ -214,15 +214,21 @@
         <img id="searchClear" src="Data/IMG/Search/Clear.png">
         <img id="searchSubmit" src="Data/IMG/Search/Search.png">
     </form>
-    <table id="links"></table>
+    <tableLinks id="links"></tableLinks>
     <script>
+        // 定义默认变量值
+        let links = null;
+        let linksColNum = null;
         let searchEngineGoogle = false;
         let searchUrl = "https://www.bing.com/search?q=";
+        // 获取后期需要用到的元素
+        const tableLinks = document.getElementById("links");
         const searchForm = document.getElementById("searchForm");
         const searchInput = document.getElementById("searchInput");
         const searchClear = document.getElementById("searchClear");
         const searchEngine = document.getElementById("searchEngine");
         const searchSubmit = document.getElementById("searchSubmit");
+        // 添加点击事件用于更换搜索引擎
         searchEngine.addEventListener("click", function () {
             if (searchEngineGoogle) {
                 searchEngine.src = "Data/IMG/Search/Bing.png";
@@ -233,10 +239,10 @@
             }
             searchEngineGoogle = !searchEngineGoogle;
         });
+        // 添加搜索框监听事件用于显示和隐藏"清空"按键
         searchInput.addEventListener("input", function (event) {
             const searchValue = event.target.value;
             if (searchValue.length == 0) {
-                console.log(1);
                 searchClear.style.display = "none"
                 searchInput.style.setProperty("width", "calc(100% - 90px)");
             } else {
@@ -244,24 +250,28 @@
                 searchInput.style.setProperty("width", "calc(100% - 130px)");
             }
         });
+        // 为"清空"按键添加点击事件用于清除搜索框的内容
         searchClear.addEventListener("click", function () {
             searchInput.focus();
             searchInput.value = null;
             searchClear.style.display = "none";
             searchInput.style.setProperty("width", "calc(100% - 90px)");
         });
+        // 为"搜索"按键添加点击事件用于跳转查询
         searchSubmit.addEventListener("click", function () {
             const searchValue = searchInput.value.trim();
             if (searchValue.length > 0) {
                 window.location.href = searchUrl + encodeURIComponent(searchValue);
             }
         });
+        // 为"清空"按键添加点聚焦和失焦事件用于控制搜索框内文字颜色
         searchClear.addEventListener('mouseout', function () {
             searchInput.style.color = "#FFFFFF";
         });
         searchClear.addEventListener('mouseover', function () {
             searchInput.style.color = "#BEBEBE";
         });
+        // 为form表单添加提交事件用于跳转查询
         searchForm.addEventListener("submit", function (event) {
             event.preventDefault();
             const searchValue = searchInput.value.trim();
@@ -269,61 +279,63 @@
                 window.location.href = searchUrl + encodeURIComponent(searchValue);
             }
         });
-    </script>
-    <script>
-        let links = null;
+        // Ajax请求"Links.json"配置文件
         const xhr = new XMLHttpRequest();
         xhr.open("GET", "Data/JSON/Links.json", false);
         xhr.onload = function () {
             if (xhr.status === 200) {
-                links = JSON.parse(xhr.responseText);
-                function LinkLoad() {
-                    const table = document.getElementById("links");
-                    let colNum = Math.floor(Math.max((window.innerWidth - 200), 600) / 80);
-                    const links = JSON.parse(xhr.responseText);
-                    table.innerHTML = null;
-                    if (colNum > links.length) { colNum = links.length; }
-                    const rowNum = Math.ceil(links.length / colNum);
-                    table.style.minWidth = colNum * 80 + 'px';
-                    for (let i = 0; i < rowNum; i++) {
-                        const row = document.createElement("tr");
-                        for (let j = 0; j < colNum; j++) {
-                            const index = i * colNum + j;
-                            const cell = document.createElement("td");
-                            if (index < links.length) {
-                                const temp = links[index];
-                                const link = document.createElement("a");
-                                const image = document.createElement("img");
-                                link.href = temp.href;
-                                image.className = "link";
-                                image.src = "Data/IMG/Links/" + temp.image;
-                                image.alt = temp.image.replace(/\.png$/, '');
-                                link.appendChild(image);
-                                cell.appendChild(link);
-                            }else{
-                                cell.style.pointerEvents = "none";
-                            }
-                            row.appendChild(cell);
-                        }
-                        table.appendChild(row);
-                    }
-                }
-                window.addEventListener("load", function (e) {
-                    LinkLoad();
-                    let resizeTimer;
-                    window.addEventListener("resize", function (e) {
-                        clearTimeout(resizeTimer);
-                        resizeTimer = setTimeout(function (e) {
-                            LinkLoad();
-                        }, 150);
-                    });
-                });
+                links = JSON.parse(xhr.responseText)
             }
             else {
                 location.reload();
             }
         };
         xhr.send();
+        // 定义一个函数用于重置"tableLinks"
+        function LinkLoad() {
+            let colNum = Math.floor(Math.max((window.innerWidth - 200), 600) / 80);
+            if (colNum > links.length) { colNum = links.length; }
+            if (linksColNum != colNum) {
+                linksColNum = colNum;
+                tableLinks.innerHTML = null;
+                const rowNum = Math.ceil(links.length / colNum);
+                tableLinks.style.minWidth = colNum * 80 + 'px';
+                for (let i = 0; i < rowNum; i++) {
+                    const row = document.createElement("tr");
+                    for (let j = 0; j < colNum; j++) {
+                        const index = i * colNum + j;
+                        const cell = document.createElement("td");
+                        if (index < links.length) {
+                            const tempData = links[index];
+                            const link = document.createElement("a");
+                            const image = document.createElement("img");
+                            link.href = tempData.href;
+                            image.className = "link";
+                            image.src = "Data/IMG/Links/" + tempData.image;
+                            image.alt = tempData.image.replace(/\.png$/, '');
+                            link.appendChild(image);
+                            cell.appendChild(link);
+                        } else {
+                            cell.style.pointerEvents = "none";
+                        }
+                        row.appendChild(cell);
+                    }
+                    tableLinks.appendChild(row);
+                }
+            }
+        }
+        // 添加页面加载监听事件
+        window.addEventListener("load", function (e) {
+            LinkLoad();
+            // 添加页面尺寸更改监听事件
+            let resizeTimer;
+            window.addEventListener("resize", function (e) {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function (e) {
+                    LinkLoad();
+                }, 150);
+            });
+        });
     </script>
     <!-- sakura shader -->
     <script id="sakura_point_vsh" type="x-shader/x_vertex">
@@ -561,7 +573,7 @@
 		    gl_FragColor = col / 5.0;
 		}
 		</script>
-    <!-- effect fragment shader template -->
+    <!-- effect fragment shader tempDatalate -->
     <script id="fx_common_fsh" type="x-shader/x_fragment">
 		#ifdef GL_ES
 		//precision mediump float;
