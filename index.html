@@ -66,7 +66,8 @@
       opacity: 0.75;
     }
 
-    img#searchEngine {
+    img#searchEngineBing,
+    img#searchEngineGoogle {
       float: left;
       width: 30px;
       height: 30px;
@@ -78,7 +79,8 @@
       justify-content: center;
     }
 
-    img#searchEngine:hover {
+    img#searchEngineBing:hover,
+    img#searchEngineGoogle:hover {
       animation: jitter 0.5s linear infinite;
     }
 
@@ -227,7 +229,8 @@
     <img id="ico" src="Data/IMG/HMU-WH.png" alt="HMU-WH">
     <p id="title">HMU - WH</p>
     <form id="searchForm">
-      <img id="searchEngine" src="Data/IMG/Search/Bing.png">
+      <img id="searchEngineBing" src="Data/IMG/Search/Bing.png">
+      <img id="searchEngineGoogle" src="Data/IMG/Search/Google.png" , style="display: none;">
       <input id="searchInput" type="text" name="" placeholder="&#8668;切换搜索引擎" autocomplete="off">
       <img id="searchClear" src="Data/IMG/Search/Clear.png">
       <img id="searchSubmit" src="Data/IMG/Search/Search.png">
@@ -238,25 +241,26 @@
     // 定义默认变量值
     let links = null;
     let linksColNum = null;
-    let searchEngineGoogle = false;
+    let searchsearchEngineGoogle = false;
     let searchUrl = "https://www.bing.com/search?q=";
     // 获取后期需要用到的元素
     const tableLinks = document.getElementById("links");
     const searchForm = document.getElementById("searchForm");
     const searchInput = document.getElementById("searchInput");
     const searchClear = document.getElementById("searchClear");
-    const searchEngine = document.getElementById("searchEngine");
     const searchSubmit = document.getElementById("searchSubmit");
+    const searchEngineBing = document.getElementById("searchEngineBing");
+    const searchEngineGoogle = document.getElementById("searchEngineGoogle");
     // 添加点击事件用于更换搜索引擎
-    searchEngine.addEventListener("click", function () {
-      if (searchEngineGoogle) {
-        searchEngine.src = "Data/IMG/Search/Bing.png";
-        searchUrl = "https://www.bing.com/search?q=";
-      } else {
-        searchEngine.src = "Data/IMG/Search/Google.png";
-        searchUrl = "https://www.google.com/search?q=";
-      }
-      searchEngineGoogle = !searchEngineGoogle;
+    searchEngineBing.addEventListener("click", function () {
+      searchEngineBing.style.display = "none";
+      searchEngineGoogle.style.display = "block";
+      searchUrl = "https://www.google.com/search?q=";
+    });
+    searchEngineGoogle.addEventListener("click", function () {
+      searchEngineBing.style.display = "block";
+      searchEngineGoogle.style.display = "none";
+      searchUrl = "https://www.bing.com/search?q=";
     });
     // 添加搜索框监听事件用于显示和隐藏"清空"按键
     searchInput.addEventListener("input", function (event) {
