@@ -311,7 +311,7 @@
     xhr.send();
     // 定义一个函数用于重置"tableLinks"
     function LinkLoad() {
-      let colNum = Math.floor(Math.max((window.innerWidth - 200), 600) / 80);
+      let colNum = Math.floor(Math.max((window.innerWidth - 600), 600) / 80);
       if (colNum > links.length) { colNum = links.length; }
       if (linksColNum != colNum) {
         linksColNum = colNum;
